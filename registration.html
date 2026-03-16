@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Register | SecretDate ❤️</title>
+<link rel="stylesheet" href="css/style.css" />
+<style>
+body {
+  background: #ffe6ea;
+  font-family: "Segoe UI", sans-serif;
+  text-align: center;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+form {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
+  margin: 40px auto;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+label {
+  font-size: 14px;
+}
+.btn {
+  background: #ff4d6d;
+  color: white;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  font-weight: bold;
+  border-radius: 6px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.terms {
+  text-align: left;
+  font-size: 12px;
+}
+</style>
+</head>
+<body>
+
+<h1>SecretDate ❤️</h1>
+<p>Your next date is a secret… until you meet.</p>
+
+<form id="registrationForm">
+  <input type="text" placeholder="Full Name" required />
+  <select required>
+    <option value="">Select Gender</option>
+    <option>Male</option>
+    <option>Female</option>
+    <option>Other</option>
+  </select>
+  <input type="email" placeholder="Email Address" required />
+  <input type="tel" placeholder="Mobile Number" required />
+  <input type="text" placeholder="City" required />
+  
+  <div class="terms">
+    <p>
+      By registering on SecretDate, you agree that this platform only helps introduce people for blind dates.
+      SecretDate does not take responsibility for personal interactions between users. Users must not share others’
+      personal information without permission and must respect privacy.
+    </p>
+    <label>
+      <input type="checkbox" id="agree" required /> I agree to the Privacy Policy and Terms
+    </label>
+  </div>
+
+  <button type="submit" class="btn">Continue</button>
+</form>
+
+<script>
+document.getElementById('registrationForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  if (!document.getElementById('agree').checked) {
+    alert('Please agree to the Privacy Policy and Terms.');
+    return;
+  }
+  window.location.href = 'date-preferences.html';
+});
+</script>
+
+</body>
+</html>

@@ -40,37 +40,23 @@ input,select,textarea {
   margin-top:10px;
   cursor:pointer;
 }
-.preview {
-  margin:10px 0;
-}
 img {
   max-width:100px;
   border-radius:50%;
   margin-top:10px;
-}
-.available {
-  background:#fff;
-  border-radius:12px;
-  padding:15px;
-  max-width:430px;
-  margin:20px auto;
-  box-shadow:0 4px 8px rgba(0,0,0,0.1);
-}
-.available h3 {
-  margin-top:0;
-  color:#ff4d6d;
 }
 </style>
 </head>
 <body>
 
 <h1>Your Date Preferences ❤️</h1>
+
 <form id="preferencesForm">
 
   <label>Upload Your Photo:</label>
   <input type="file" id="photo" accept="image/*" />
 
-  <div class="preview">
+  <div id="previewBox" style="margin:10px 0;">
     <img id="previewImage" style="display:none;" />
   </div>
 
@@ -110,14 +96,11 @@ img {
   <button type="submit" class="btn">Submit Preferences</button>
 </form>
 
-<div class="available">
-  <h3>People available near your time 💬</h3>
-  <ul id="availableList" style="list-style:none;padding:0;"></ul>
-</div>
-
 <script>
 const form = document.getElementById('preferencesForm');
 const previewImage = document.getElementById('previewImage');
+
+// show preview when user selects photo
 document.getElementById('photo').addEventListener('change', function(e){
   const file = e.target.files[0];
   if(file){
@@ -130,28 +113,12 @@ document.getElementById('photo').addEventListener('change', function(e){
   }
 });
 
-// Demo available users
-const samplePeople = [
-  {name:'Aarav ❤️', time:'7:00 PM', type:'Dinner Date'},
-  {name:'Meera 💕', time:'8:00 PM', type:'Coffee Date'},
-  {name:'Rohan 💖', time:'7:30 PM', type:'Walk Date'}
-];
-
+// temporary confirmation handler
 form.addEventListener('submit', function(e){
   e.preventDefault();
-  alert('🎉 Thank you! We’ll find your match and contact you by your chosen method.');
-  showAvailable();
+  alert('🎉 Thank you! We’ll contact you by your selected method once a match is found.');
+  window.location.href = 'index.html';
 });
-
-function showAvailable(){
-  const list=document.getElementById('availableList');
-  list.innerHTML='';
-  samplePeople.forEach(p=>{
-    const li=document.createElement('li');
-    li.innerHTML=`<strong>${p.name}</strong> — Available at ${p.time} (${p.type})`;
-    list.appendChild(li);
-  });
-}
 </script>
 
 </body>

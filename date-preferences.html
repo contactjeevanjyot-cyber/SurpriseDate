@@ -3,48 +3,84 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Date Preferences | SecretDate ❤️</title>
-<link rel="stylesheet" href="css/style.css" />
+<title>Date Preferences | SurpriseDate ❤️</title>
 <style>
 body {
-  background: #ffe6ea;
-  font-family: "Segoe UI", sans-serif;
-  text-align: center;
-  color: #333;
+  background:#ffe6ea;
+  font-family:'Segoe UI',sans-serif;
+  text-align:center;
+  color:#333;
+  margin:0;
+  padding:0;
 }
 form {
-  background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  width: 90%;
-  max-width: 400px;
-  margin: 40px auto;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  background:#fff;
+  border-radius:12px;
+  padding:20px;
+  width:90%;
+  max-width:430px;
+  margin:40px auto;
+  box-shadow:0 4px 8px rgba(0,0,0,0.1);
 }
-input, select, textarea {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+input,select,textarea {
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border:1px solid #ccc;
+  border-radius:6px;
 }
 .btn {
-  background: #ff4d6d;
-  color: white;
-  border: none;
-  padding: 12px;
-  width: 100%;
-  font-weight: bold;
-  border-radius: 6px;
-  margin-top: 10px;
-  cursor: pointer;
+  background:#ff4d6d;
+  color:white;
+  border:none;
+  padding:12px;
+  width:100%;
+  font-weight:bold;
+  border-radius:6px;
+  margin-top:10px;
+  cursor:pointer;
+}
+.preview {
+  margin:10px 0;
+}
+img {
+  max-width:100px;
+  border-radius:50%;
+  margin-top:10px;
+}
+.available {
+  background:#fff;
+  border-radius:12px;
+  padding:15px;
+  max-width:430px;
+  margin:20px auto;
+  box-shadow:0 4px 8px rgba(0,0,0,0.1);
+}
+.available h3 {
+  margin-top:0;
+  color:#ff4d6d;
 }
 </style>
 </head>
 <body>
 
-<h1>Date Preferences ❤️</h1>
+<h1>Your Date Preferences ❤️</h1>
 <form id="preferencesForm">
+
+  <label>Upload Your Photo:</label>
+  <input type="file" id="photo" accept="image/*" />
+
+  <div class="preview">
+    <img id="previewImage" style="display:none;" />
+  </div>
+
+  <label>Preferred Contact Method:</label>
+  <select id="contactChoice" required>
+    <option value="">Select one</option>
+    <option value="whatsapp">WhatsApp</option>
+    <option value="email">Email</option>
+  </select>
+
   <label>Interested In:</label>
   <select required>
     <option value="">Select</option>
@@ -55,7 +91,7 @@ input, select, textarea {
 
   <label>Type of Date:</label>
   <select required>
-    <option value="">Select</option>
+    <option value="">Select type</option>
     <option>Coffee Date</option>
     <option>Dinner Date</option>
     <option>Walk</option>
@@ -63,23 +99,59 @@ input, select, textarea {
   </select>
 
   <label>Preferred Date:</label>
-  <input type="date" required />
+  <input type="date" id="date" required />
 
   <label>Preferred Time:</label>
-  <input type="time" required />
+  <input type="time" id="time" required />
 
   <label>Short Message:</label>
-  <textarea placeholder="Describe what kind of date you’d like" rows="3" required></textarea>
+  <textarea placeholder="Write something about your ideal date" rows="3"></textarea>
 
   <button type="submit" class="btn">Submit Preferences</button>
 </form>
 
+<div class="available">
+  <h3>People available near your time 💬</h3>
+  <ul id="availableList" style="list-style:none;padding:0;"></ul>
+</div>
+
 <script>
-document.getElementById('preferencesForm').addEventListener('submit', function(e){
-  e.preventDefault();
-  alert('Thank you! We will match you with someone available at the same time. If a match is found, we will send you a WhatsApp payment link 1 hour before the date.');
-  window.location.href = 'index.html';
+const form = document.getElementById('preferencesForm');
+const previewImage = document.getElementById('previewImage');
+document.getElementById('photo').addEventListener('change', function(e){
+  const file = e.target.files[0];
+  if(file){
+    const reader = new FileReader();
+    reader.onload = function(ev){
+      previewImage.src = ev.target.result;
+      previewImage.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  }
 });
+
+// Demo available users
+const samplePeople = [
+  {name:'Aarav ❤️', time:'7:00 PM', type:'Dinner Date'},
+  {name:'Meera 💕', time:'8:00 PM', type:'Coffee Date'},
+  {name:'Rohan 💖', time:'7:30 PM', type:'Walk Date'}
+];
+
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+  alert('🎉 Thank you! We’ll find your match and contact you by your chosen method.');
+  showAvailable();
+});
+
+function showAvailable(){
+  const list=document.getElementById('availableList');
+  list.innerHTML='';
+  samplePeople.forEach(p=>{
+    const li=document.createElement('li');
+    li.innerHTML=`<strong>${p.name}</strong> — Available at ${p.time} (${p.type})`;
+    list.appendChild(li);
+  });
+}
 </script>
 
 </body>

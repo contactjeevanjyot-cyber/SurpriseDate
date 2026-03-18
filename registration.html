@@ -58,31 +58,25 @@ label {
 <form id="registrationForm">
   <input type="text" placeholder="Full Name" required />
 
-<select required>
-  <option value="">Select Gender</option>
-  <option>Male</option>
-  <option>Female</option>
-  <option>Lesbian</option>
-  <option>Gay</option>
-  <option>Bisexual</option>
-  <option>Transgender</option>
-</select>
+  <select required>
+    <option value="">Select Gender</option>
+    <option>Male</option>
+    <option>Female</option>
+    <option>Lesbian</option>
+    <option>Gay</option>
+    <option>Bisexual</option>
+    <option>Transgender</option>
+  </select>
 
-
-  <!-- 👇 New Age field -->
   <input type="number" id="age" placeholder="Age" min="18" required />
   <p style="color:#ff4d6d; font-size:12px; margin:0;">
     Only users 18+ can use this platform.
   </p>
-  <!-- 👆 End of new section -->
 
   <input type="email" placeholder="Email Address" required />
   <input type="tel" placeholder="Mobile Number" required />
   <input type="text" placeholder="City" value="Ahmedabad" required />
-</form>
 
-
-  
   <div class="terms">
     <p>
       By registering on SecretDate, you agree that this platform only helps introduce people for blind dates.
@@ -100,13 +94,22 @@ label {
 <script>
 document.getElementById('registrationForm').addEventListener('submit', function(e){
   e.preventDefault();
+
+  const age = parseInt(document.getElementById('age').value);
+  if (age < 18 || isNaN(age)) {
+    alert('🚫 Sorry, you must be 18 or older to use SecretDate.');
+    return;
+  }
+
   if (!document.getElementById('agree').checked) {
     alert('Please agree to the Privacy Policy and Terms.');
     return;
   }
+
   window.location.href = 'date-preferences.html';
 });
 </script>
 
 </body>
 </html>
+

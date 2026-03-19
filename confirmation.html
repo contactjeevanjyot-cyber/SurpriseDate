@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Your Date Request is Confirmed ❤️ | SecretDate</title>
+<style>
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  background: #ffe6ea;
+  color: #333;
+  text-align: center;
+}
+
+.confirm-box {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 25px;
+  margin: 40px auto;
+  max-width: 500px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+h1 {
+  color: #ff4d6d;
+  margin-bottom: 10px;
+}
+
+h2 {
+  color: #28a745;
+}
+
+.details img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: 10px;
+}
+
+.details {
+  background: #f9fffa;
+  border-left: 5px solid #28a745;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: left;
+  margin-top: 20px;
+  line-height: 1.6;
+}
+
+p.highlight {
+  background: #e0ffe8;
+  padding: 10px;
+  border-radius: 8px;
+  color: #006400;
+  font-weight: 500;
+}
+
+button {
+  background: #ff4d6d;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 30px;
+  font-size: 16px;
+  margin: 15px 8px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+button:hover {
+  background: #ff1f4e;
+}
+
+.footer-line {
+  margin-top: 30px;
+  font-size: 14px;
+  color: #555;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .confirm-box { margin: 20px; padding: 15px; }
+}
+</style>
+</head>
+<body>
+
+<div class="confirm-box">
+  <h1>Your Date Request is Confirmed ❤️</h1>
+  <p>Your next date is a secret… until you meet.</p>
+
+  <div class="details">
+    <h3>Submitted Details</h3>
+    <img id="photoPreview" src="" alt="User Photo" />
+    <p><strong>Preferred Contact Method:</strong> <span id="contact"></span></p>
+    <p><strong>Interested In:</strong> <span id="interested"></span></p>
+    <p><strong>Type of Date:</strong> <span id="type"></span></p>
+    <p><strong>Preferred Date:</strong> <span id="date"></span></p>
+    <p><strong>Preferred Time:</strong> <span id="time"></span></p>
+    <p><strong>Message:</strong> <span id="message"></span></p>
+  </div>
+
+  <p class="highlight" id="matchLine">
+    We are finding your perfect match ❤️
+  </p>
+
+  <p><strong>✅ Your request has been successfully submitted.</strong><br>
+  We will match you with someone available at your selected date and time.</p>
+
+  <p><strong>💰 Payment Info:</strong><br>
+  1 hour before your date, you’ll receive a WhatsApp message with a payment link of <strong>₹249</strong> to confirm your booking.</p>
+
+  <div class="tree-impact">
+    <h2>🌱 You are also helping the planet</h2>
+    <p>
+      When your date is confirmed, SecretDate will plant one tree on your behalf.<br><br>
+      Two people meet. One new life begins 🌱<br><br>
+      Thank you for being part of SecretDate ❤️
+    </p>
+  </div>
+
+  <button onclick="goHome()">🏠 Go Back to Home</button>
+  <button onclick="editPreferences()">✏️ Edit Preferences</button>
+
+  <p class="footer-line">Every SecretDate ❤️ = One Tree 🌱</p>
+</div>
+
+<script>
+// Load stored user data (for demo, using localStorage)
+const stored = JSON.parse(localStorage.getItem('dateData')) || {};
+
+// Fill fields dynamically
+document.getElementById('photoPreview').src = stored.photoURL || '';
+document.getElementById('contact').textContent = stored.contactChoice || '—';
+document.getElementById('interested').textContent = stored.interestedIn || '—';
+document.getElementById('type').textContent = stored.dateType || '—';
+document.getElementById('date').textContent = stored.date || '—';
+document.getElementById('time').textContent = stored.time || '—';
+document.getElementById('message').textContent = stored.message || '—';
+
+// Dynamic match line
+if (stored.interestedIn) {
+  document.getElementById('matchLine').textContent = 
+    `We are finding a ${stored.interestedIn} match for you ❤️`;
+}
+
+// Buttons
+function goHome() {
+  window.location.href = 'index.html';
+}
+function editPreferences() {
+  window.location.href = 'date-preferences.html';
+}
+</script>
+
+</body>
+</html>

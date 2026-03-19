@@ -67,6 +67,25 @@
     <p class="badge">Every SecretDate ❤️ = One Tree 🌱</p>
   </div>
 </section>
+<!-- 👣 Visitor Counter Footer -->
+<footer style="background:#ffe6ea; text-align:center; padding:20px 10px; color:#333; font-family:'Segoe UI',sans-serif;">
+  <p style="margin:5px 0;">👀 <strong id="visitCount">Loading...</strong> people have visited <strong>SecretDate ❤️</strong></p>
+  <p style="font-size:13px; color:#555;">Every SecretDate ❤️ = One Tree 🌱</p>
+</footer>
+
+<script>
+// 🌍 Visitor Counter using CountAPI
+async function updateCounter() {
+  try {
+    const res = await fetch("[api.countapi.xyz](https://api.countapi.xyz/hit/secretdate/homepage-visits)");
+    const data = await res.json();
+    document.getElementById("visitCount").textContent = data.value.toLocaleString();
+  } catch {
+    document.getElementById("visitCount").textContent = '---';
+  }
+}
+updateCounter();
+</script>
 
 </body>
 </html>

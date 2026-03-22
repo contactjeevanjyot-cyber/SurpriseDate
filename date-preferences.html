@@ -1,111 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Date Preferences | SurpriseDate ❤️</title>
-<style>
-body {
-  background:#ffe6ea;
-  font-family:'Segoe UI',sans-serif;
-  text-align:center;
-  color:#333;
-  margin:0;
-  padding:0;
-}
-form {
-  background:#fff;
-  border-radius:12px;
-  padding:20px;
-  width:90%;
-  max-width:430px;
-  margin:40px auto;
-  box-shadow:0 4px 8px rgba(0,0,0,0.1);
-}
-input,select,textarea {
-  width:100%;
-  padding:10px;
-  margin:8px 0;
-  border:1px solid #ccc;
-  border-radius:6px;
-}
-.btn {
-  background:#ff4d6d;
-  color:white;
-  border:none;
-  padding:12px;
-  width:100%;
-  font-weight:bold;
-  border-radius:6px;
-  margin-top:10px;
-  cursor:pointer;
-}
-img {
-  max-width:100px;
-  border-radius:50%;
-  margin-top:10px;
-}
-</style>
-</head>
-<body>
-
-<h1>Your Date Preferences ❤️</h1>
-
-<form id="preferencesForm">
-
-  <label>Upload Your Photo:</label>
-  <input type="file" id="photo" accept="image/*" />
-
-  <div id="previewBox" style="margin:10px 0;">
-    <img id="previewImage" style="display:none;" />
-  </div>
-
-  <label>Preferred Contact Method:</label>
-  <select id="contactChoice" required>
-    <option value="">Select one</option>
-    <option value="whatsapp">WhatsApp</option>
-    <option value="email">Email</option>
-  </select>
-
-<label>Interested In:</label>
-<select required>
-  <option value="">Select</option>
-  <option>Male</option>
-  <option>Female</option>
-  <option>Lesbian</option>
-  <option>Gay</option>
-  <option>Bisexual</option>
-  <option>Transgender</option>
-  <option>Any</option>
-</select>
-
-
-  <label>Type of Date:</label>
-  <select required>
-    <option value="">Select type</option>
-    <option>Coffee Date</option>
-    <option>Dinner Date</option>
-    <option>Walk</option>
-    <option>Surprise Date</option>
-  </select>
-
-  <label>Preferred Date:</label>
-  <input type="date" id="date" required />
-
-  <label>Preferred Time:</label>
-  <input type="time" id="time" required />
-
-  <label>Short Message:</label>
-  <textarea placeholder="Write something about your ideal date" rows="3"></textarea>
-
-  <button type="submit" class="btn">Submit Preferences</button>
-</form>
-
 <script>
 const form = document.getElementById('preferencesForm');
 const previewImage = document.getElementById('previewImage');
 
-// show preview when user selects photo
+// Show photo preview
 document.getElementById('photo').addEventListener('change', function(e){
   const file = e.target.files[0];
   if(file){
@@ -118,13 +15,79 @@ document.getElementById('photo').addEventListener('change', function(e){
   }
 });
 
-// temporary confirmation handler
-form.addEventListener('submit', function(e){
+// Form submission with WhatsApp Auto-Open
+form.addEventListener('submit', async function(e){
   e.preventDefault();
-  alert('🎉 Thank you! We’ll contact you by your selected method once a match is found.');
-  window.location.href = 'index.html';
-});
-</script>
 
-</body>
-</html>
+  const photoFile = document.getElementById('photo').files[0];
+  let photoURL = '';
+  
+  if (photoFile) {
+    const reader = new FileReader();
+    reader.onload = async function(ev) {
+      photoURL = ev.target.result;
+      await submitToBackend(photoURL);
+    };
+    reader.readAsDataURL(photoFile);
+  } else {
+    await submitToBackend('');
+  }
+});
+
+async function submitToBackend(photoURL) {
+  const registrationData = JSON.parse(localStorage.getItem('registrationData') || '{}');
+  
+  const data = {
+    name: registrationData.name || 'User',
+    mobile: registrationData.mobile || '',
+    contactChoice: document.getElementById('contactChoice').value,
+    photoURL: photoURL,
+    date: document.getElementById('date').value,
+    time: document.getElementById('time').value,
+    message: document.querySelector('textarea').value,
+    interestedIn: document.querySelectorAll('select')[1].value,
+    dateType: document.querySelectorAll('select')[2].value
+  };
+
+  try {
+    const response = await fetch('/.netlify/functions/saveData', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+    
+    if (result.status === 'success') {
+      localStorage.setItem('dateData', JSON.stringify(data));
+      
+      if (result.matched) {
+        // 🎉 MATCH FOUND - Auto-open WhatsApp
+        const message = `🎉 AMAZING! Your SecretDate match is confirmed!
+
+📅 Date: ${data.date}
+⏰ Time: ${data.time}
+👤 Your Match: ${result.matchData.name}
+
+💳 Complete payment to confirm: [rzp.io](https://rzp.io/rzp/B1sDY6e)
+
+Looking forward to your surprise date! ❤️
+- SecretDate Team`;
+        
+        // Open WhatsApp Web with pre-filled message
+        window.open(`[wa.me](https://wa.me/91${data.mobile}?text=${encodeURIComponent(message)})`);
+        
+        alert(`🎉 MATCH FOUND! You've been matched with ${result.matchData.name}! WhatsApp will open automatically.`);
+      } else {
+        alert('🎉 Thank you! We\'ll notify you via WhatsApp when a match is found.');
+      }
+      
+      window.location.href = 'confirmation.html';
+    } else {
+      alert('Error: ' + result.error);
+    }
+  } catch (err) {
+    alert('Network error: ' + err.message);
+  }
+}
+</script>

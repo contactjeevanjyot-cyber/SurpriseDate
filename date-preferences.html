@@ -49,6 +49,8 @@ async function submitToBackend(photoURL) {
     dateType: document.querySelectorAll('select')[2].value
   };
 
+  console.log('Sending to backend:', data); // For testing
+
   try {
     const response = await fetch('/.netlify/functions/saveData', {
       method: 'POST',
@@ -57,6 +59,7 @@ async function submitToBackend(photoURL) {
     });
 
     const result = await response.json();
+    console.log('Backend response:', result); // For testing
     
     if (result.status === 'success') {
       localStorage.setItem('dateData', JSON.stringify(data));
@@ -69,10 +72,9 @@ async function submitToBackend(photoURL) {
 ⏰ Time: ${data.time}
 👤 Your Match: ${result.matchData.name}
 
-💳 Complete payment to confirm: [rzp.io](https://rzp.io/rzp/B1sDY6e)
+💳 Complete payment: [rzp.io](https://rzp.io/rzp/B1sDY6e)
 
-Looking forward to your surprise date! ❤️
-- SecretDate Team`;
+Looking forward to your surprise date! ❤️`;
         
         // Open WhatsApp Web with pre-filled message
         window.open(`[wa.me](https://wa.me/91${data.mobile}?text=${encodeURIComponent(message)})`);
@@ -88,6 +90,7 @@ Looking forward to your surprise date! ❤️
     }
   } catch (err) {
     alert('Network error: ' + err.message);
+    console.error('Submit error:', err);
   }
 }
 </script>

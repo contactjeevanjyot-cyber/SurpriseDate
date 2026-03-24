@@ -74,14 +74,13 @@ label {
   </p>
 
   <input type="email" placeholder="Email Address" required />
- <input type="tel" id="mobile" placeholder="Mobile Number" required />
-
+  <input type="tel" id="mobile" placeholder="Mobile Number" required />
   <input type="text" placeholder="City" value="Ahmedabad" required />
 
   <div class="terms">
     <p>
       By registering on SecretDate, you agree that this platform only helps introduce people for blind dates.
-      SecretDate does not take responsibility for personal interactions between users. Users must not share others’
+      SecretDate does not take responsibility for personal interactions between users. Users must not share others'
       personal information without permission and must respect privacy.
     </p>
     <label>
@@ -107,10 +106,21 @@ document.getElementById('registrationForm').addEventListener('submit', function(
     return;
   }
 
+  // Store registration data for later use
+  const registrationData = {
+    name: document.querySelector('input[placeholder="Full Name"]').value,
+    mobile: document.getElementById('mobile').value,
+    email: document.querySelector('input[placeholder="Email Address"]').value,
+    gender: document.querySelector('select').value,
+    age: age,
+    city: document.querySelector('input[placeholder="City"]').value
+  };
+  
+  localStorage.setItem('registrationData', JSON.stringify(registrationData));
+  console.log('Registration data stored:', registrationData);
   window.location.href = 'date-preferences.html';
 });
 </script>
 
 </body>
 </html>
-

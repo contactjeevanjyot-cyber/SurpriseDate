@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SurpriseDate ❤️</title>
+  <title>SecretDate ❤️</title>
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -12,15 +13,23 @@
       text-align: center;
       color: #333;
     }
+
     header {
       background: linear-gradient(135deg, #ff597b, #ff3366);
       color: white;
-      padding: 60px 20px;
+      padding: 40px 20px;
     }
+
     h1 {
-      margin: 0;
-      font-size: 40px;
+      margin: 10px 0;
+      font-size: 32px;
     }
+
+    .tagline {
+      font-size: 16px;
+      opacity: 0.9;
+    }
+
     .btn {
       display: inline-block;
       padding: 12px 25px;
@@ -30,56 +39,83 @@
       border-radius: 30px;
       font-weight: bold;
       margin-top: 20px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #ffe6ea;
+    }
+
+    section {
+      padding: 30px 20px;
+    }
+
+    .purpose-section {
+      background: #fff;
+      border-radius: 12px;
+      margin: 20px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .highlight {
+      background: #e0ffe8;
+      padding: 10px;
+      border-radius: 8px;
+      color: #006400;
+      margin-top: 10px;
+    }
+
+    footer {
+      padding: 20px;
+      font-size: 14px;
     }
   </style>
 </head>
+
 <body>
 
 <header>
-  <h1>SurpriseDate ❤️</h1>
-  <p>Your next date is a secret… until you meet.</p>
- <a class="btn" href="registration.html">Start My Surprise</a>
+
+  <h1>SecretDate ❤️</h1>
+  <p class="tagline">Your next date is a secret… until you meet.</p>
+
+  <a class="btn" href="registration.html">Start My Surprise</a>
 
 </header>
 
-<h2>Welcome to SurpriseDate!</h2>
-<p>A fun and spontaneous way to meet new partners.</p>
-
-  <!-- 🌱 Date with a Purpose Section -->
-<section class="purpose-section">
-  <div class="purpose-content">
-    <h2>🌱 Date with a Purpose</h2>
-    <p>At <strong>SecretDate ❤️</strong>, every connection creates something beautiful.</p>
-    <p>When you go on a date through SecretDate, we plant <strong>one tree 🌳</strong> on your behalf.</p>
-
-    <div class="journey">
-      <p>🌸 Two people meet.</p>
-      <p>🤝 Two strangers become friends.</p>
-      <p>🌿 Together, they give life to nature.</p>
-    </div>
-
-    <p class="highlight">
-      “Every date you go on doesn’t just create a memory — it creates a <strong>new life 🌱</strong>”
-    </p>
-
-    <p class="closing"><em>Make your date meaningful.<br>Make your connection count.</em></p>
-
-    <p class="badge">Every SecretDate ❤️ = One Tree 🌱</p>
-  </div>
+<section>
+  <h2>Welcome to SecretDate!</h2>
+  <p>A fun and spontaneous way to meet new partners.</p>
 </section>
-<!-- 👣 Visitor Counter Footer -->
-<footer style="background:#ffe6ea; text-align:center; padding:20px 10px; color:#333; font-family:'Segoe UI',sans-serif;">
-  <p style="margin:5px 0;">👀 <strong id="visitCount">Loading...</strong> people have visited <strong>SecretDate ❤️</strong></p>
-  <p style="font-size:13px; color:#555;">Every SecretDate ❤️ = One Tree 🌱</p>
+
+<section class="purpose-section">
+  <h2>🌱 Date with a Purpose</h2>
+
+  <p>At <strong>SecretDate ❤️</strong>, every connection creates something beautiful.</p>
+
+  <p>When you go on a date, we plant <strong>one tree 🌳</strong> on your behalf.</p>
+
+  <p>🌸 Two people meet.<br>
+     🤝 Become friends.<br>
+     🌿 Give life to nature.</p>
+
+  <p class="highlight">
+    Every date you go on creates a new life 🌱
+  </p>
+</section>
+
+<footer>
+  👀 <strong id="visitCount">Loading...</strong> people visited SecretDate ❤️<br>
+  🌱 Every SecretDate ❤️ = One Tree
 </footer>
 
 <script>
-// 🌍 Visitor Counter using CountAPI
 async function updateCounter() {
   try {
-    const res = await fetch("[api.countapi.xyz](https://api.countapi.xyz/hit/secretdate/homepage-visits)");
+    const res = await fetch("https://api.countapi.xyz/hit/secretdate/homepage-visits");
     const data = await res.json();
-    document.getElementById("visitCount").textContent = data.value.toLocaleString();
+    document.getElementById("visitCount").textContent = data.value;
   } catch {
     document.getElementById("visitCount").textContent = '---';
   }

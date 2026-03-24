@@ -1,114 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Date Preferences ❤️ | SecretDate</title>
-
-<style>
-body {
-  background: #ffe6ea;
-  font-family: "Segoe UI", sans-serif;
-  text-align: center;
-  color: #333;
-  margin: 0;
-}
-
-form {
-  background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  width: 90%;
-  max-width: 400px;
-  margin: 40px auto;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-input, select, textarea {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
-
-textarea {
-  resize: none;
-}
-
-.btn {
-  background: #ff4d6d;
-  color: white;
-  border: none;
-  padding: 12px;
-  width: 100%;
-  font-weight: bold;
-  border-radius: 6px;
-  margin-top: 10px;
-  cursor: pointer;
-}
-
-img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  display: none;
-  margin-top: 10px;
-}
-</style>
-</head>
-
-<body>
-
-<h1>Date Preferences ❤️</h1>
-
-<form id="preferencesForm">
-
-  <!-- Photo Upload -->
-  <input type="file" id="photo" accept="image/*">
-  <img id="previewImage">
-
-  <!-- Contact Method -->
-  <select id="contactChoice" required>
-    <option value="">Preferred Contact Method</option>
-    <option>WhatsApp</option>
-    <option>Instagram</option>
-  </select>
-
-  <!-- Interested In -->
-  <select id="interestedIn" required>
-    <option value="">Interested In</option>
-    <option>Male</option>
-    <option>Female</option>
-    <option>Lesbian</option>
-    <option>Gay</option>
-    <option>Bisexual</option>
-    <option>Transgender</option>
-  </select>
-
-  <!-- Date Type -->
-  <select id="dateType" required>
-    <option value="">Type of Date</option>
-    <option>Coffee Date</option>
-    <option>Dinner Date</option>
-    <option>Walk</option>
-    <option>Surprise Date</option>
-  </select>
-
-  <!-- Date -->
-  <input type="date" id="date" required>
-
-  <!-- Time -->
-  <input type="time" id="time" required>
-
-  <!-- Message -->
-  <textarea id="message" placeholder="Describe your ideal date"></textarea>
-
-  <button type="submit" class="btn">Submit Preferences</button>
-
-</form>
-
 <script>
+document.addEventListener("DOMContentLoaded", function(){
+
 const form = document.getElementById('preferencesForm');
 const previewImage = document.getElementById('previewImage');
 
@@ -144,7 +36,7 @@ form.addEventListener('submit', async function(e){
   }
 });
 
-// 📡 Send Data to Backend
+// 📡 Send Data
 async function sendData(photoURL) {
   const registrationData = JSON.parse(localStorage.getItem('registrationData') || '{}');
 
@@ -182,9 +74,6 @@ async function sendData(photoURL) {
 https://rzp.io/rzp/B1sDY6e`;
 
         window.open(`https://wa.me/91${data.mobile}?text=${encodeURIComponent(message)}`);
-        alert("🎉 Match Found! WhatsApp opened.");
-      } else {
-        alert("✅ Preferences saved! We'll notify you when matched.");
       }
 
       window.location.href = 'confirmation.html';
@@ -194,7 +83,6 @@ https://rzp.io/rzp/B1sDY6e`;
     alert('Error: ' + err.message);
   }
 }
-</script>
 
-</body>
-</html>
+});
+</script>

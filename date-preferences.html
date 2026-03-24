@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function(){
 const form = document.getElementById('preferencesForm');
 const previewImage = document.getElementById('previewImage');
 
-// 📸 Image Preview
+// Image Preview
 document.getElementById('photo').addEventListener('change', function(e){
   const file = e.target.files[0];
   if(file){
@@ -17,7 +17,7 @@ document.getElementById('photo').addEventListener('change', function(e){
   }
 });
 
-// 🚀 Form Submit
+// Submit
 form.addEventListener('submit', async function(e){
   e.preventDefault();
 
@@ -36,9 +36,11 @@ form.addEventListener('submit', async function(e){
   }
 });
 
-// 📡 Send Data
+// Send Data
 async function sendData(photoURL) {
-  const registrationData = JSON.parse(localStorage.getItem('registrationData') || '{}');
+
+  // ✅ FIXED KEY
+  const registrationData = JSON.parse(localStorage.getItem('user') || '{}');
 
   const data = {
     name: registrationData.name || 'User',
@@ -65,7 +67,7 @@ async function sendData(photoURL) {
       localStorage.setItem('dateData', JSON.stringify(data));
 
       if (result.matched) {
-        const message = `🎉 Match Found!
+        const msg = `🎉 Match Found!
 
 📅 Date: ${data.date}
 ⏰ Time: ${data.time}
@@ -73,7 +75,7 @@ async function sendData(photoURL) {
 💳 Pay ₹249:
 https://rzp.io/rzp/B1sDY6e`;
 
-        window.open(`https://wa.me/91${data.mobile}?text=${encodeURIComponent(message)}`);
+        window.open(`https://wa.me/91${data.mobile}?text=${encodeURIComponent(msg)}`);
       }
 
       window.location.href = 'confirmation.html';

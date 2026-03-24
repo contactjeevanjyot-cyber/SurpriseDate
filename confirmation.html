@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Your Date Request is Confirmed ❤️ | SecretDate</title>
+
 <style>
 body {
   font-family: 'Segoe UI', sans-serif;
@@ -20,24 +21,11 @@ body {
   padding: 25px;
   margin: 40px auto;
   max-width: 500px;
-  animation: fadeIn 1s ease-in-out;
+  animation: fadeIn 0.8s ease-in-out;
 }
 
 h1 {
   color: #ff4d6d;
-  margin-bottom: 10px;
-}
-
-h2 {
-  color: #28a745;
-}
-
-.details img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-top: 10px;
 }
 
 .details {
@@ -50,12 +38,21 @@ h2 {
   line-height: 1.6;
 }
 
-p.highlight {
+.details img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: 10px;
+}
+
+.highlight {
   background: #e0ffe8;
   padding: 10px;
   border-radius: 8px;
   color: #006400;
   font-weight: 500;
+  margin-top: 15px;
 }
 
 button {
@@ -65,111 +62,119 @@ button {
   padding: 12px 25px;
   border-radius: 30px;
   font-size: 16px;
-  margin: 15px 8px;
+  margin: 10px;
   cursor: pointer;
-  transition: 0.2s ease;
 }
+
 button:hover {
   background: #ff1f4e;
 }
 
 .footer-line {
-  margin-top: 30px;
+  margin-top: 25px;
   font-size: 14px;
   color: #555;
+}
+
+.pay-btn {
+  display: inline-block;
+  background: #28a745;
+  color: white;
+  text-decoration: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-weight: bold;
+  margin-top: 15px;
+}
+.pay-btn:hover {
+  background: #1e7e34;
 }
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
-/* Responsive */
-@media (max-width: 600px) {
-  .confirm-box { margin: 20px; padding: 15px; }
-}
 </style>
 </head>
+
 <body>
 
 <div class="confirm-box">
+
   <h1>Your Date Request is Confirmed ❤️</h1>
   <p>Your next date is a secret… until you meet.</p>
 
+  <!-- User Details -->
   <div class="details">
     <h3>Submitted Details</h3>
-    <img id="photoPreview" src="" alt="User Photo" />
-    <p><strong>Preferred Contact Method:</strong> <span id="contact"></span></p>
+
+    <img id="photoPreview" alt="User Photo">
+
+    <p><strong>Contact Method:</strong> <span id="contact"></span></p>
     <p><strong>Interested In:</strong> <span id="interested"></span></p>
-    <p><strong>Type of Date:</strong> <span id="type"></span></p>
-    <p><strong>Preferred Date:</strong> <span id="date"></span></p>
-    <p><strong>Preferred Time:</strong> <span id="time"></span></p>
+    <p><strong>Date Type:</strong> <span id="type"></span></p>
+    <p><strong>Date:</strong> <span id="date"></span></p>
+    <p><strong>Time:</strong> <span id="time"></span></p>
     <p><strong>Message:</strong> <span id="message"></span></p>
   </div>
 
+  <!-- Matching Message -->
   <p class="highlight" id="matchLine">
     We are finding your perfect match ❤️
   </p>
 
-  <!-- 💳 Payment Button -->
-<p>
-  <a href="[rzp.io](https://rzp.io/rzp/B1sDY6e)"
-     target="_blank"
-     style="
-       display:inline-block;
-       background:#28a745;
-       color:white;
-       text-decoration:none;
-       padding:12px 25px;
-       border-radius:25px;
-       font-weight:bold;
-       box-shadow:0 3px 6px rgba(0,0,0,0.2);
-       transition:background 0.3s;
-     "
-     onmouseover="this.style.background='#1e7e34'"
-     onmouseout="this.style.background='#28a745'">
-     💳 Pay Now ₹249
+  <!-- Payment Button -->
+  <a href="https://rzp.io/rzp/B1sDY6e" target="_blank" class="pay-btn">
+    💳 Pay ₹249
   </a>
-</p>
 
-  <p><strong>💰 Payment Info:</strong><br>
-  1 hour before your date, you’ll receive a WhatsApp message with a payment link of <strong>₹249</strong> to confirm your booking.</p>
+  <!-- Payment Info -->
+  <p>
+    1 hour before your date, you will receive a WhatsApp message with a payment link to confirm your booking.
+  </p>
 
-  <div class="tree-impact">
-    <h2>🌱 You are also helping the planet</h2>
-    <p>
-      When your date is confirmed, SecretDate will plant one tree on your behalf.<br><br>
-      Two people meet. One new life begins 🌱<br><br>
-      Thank you for being part of SecretDate ❤️
-    </p>
+  <!-- Tree Section -->
+  <div class="highlight">
+    🌱 You are helping the planet! <br><br>
+    We plant one tree for every confirmed date.  
+    Two people meet. One new life begins 🌱  
+    <br><br>Thank you for choosing SecretDate ❤️
   </div>
 
-  <button onclick="goHome()">🏠 Go Back to Home</button>
-  <button onclick="editPreferences()">✏️ Edit Preferences</button>
+  <!-- Buttons -->
+  <button onclick="goHome()">🏠 Home</button>
+  <button onclick="editPreferences()">✏️ Edit</button>
 
-  <p class="footer-line">Every SecretDate ❤️ = One Tree 🌱</p>
+  <p class="footer-line">Every SecretDate ❤️ = One Tree 🌱</p>
+
 </div>
 
 <script>
-// Load stored user data (for demo, using localStorage)
+// Get stored data
 const stored = JSON.parse(localStorage.getItem('dateData')) || {};
 
-// Fill fields dynamically
-document.getElementById('photoPreview').src = stored.photoURL || '';
-document.getElementById('contact').textContent = stored.contactChoice || '—';
-document.getElementById('interested').textContent = stored.interestedIn || '—';
-document.getElementById('type').textContent = stored.dateType || '—';
-document.getElementById('date').textContent = stored.date || '—';
-document.getElementById('time').textContent = stored.time || '—';
-document.getElementById('message').textContent = stored.message || '—';
+// Fill data
+document.getElementById('contact').textContent = stored.contactChoice || '-';
+document.getElementById('interested').textContent = stored.interestedIn || '-';
+document.getElementById('type').textContent = stored.dateType || '-';
+document.getElementById('date').textContent = stored.date || '-';
+document.getElementById('time').textContent = stored.time || '-';
+document.getElementById('message').textContent = stored.message || '-';
 
-// Dynamic match line
+// Fix image display
+if (stored.photoURL) {
+  document.getElementById('photoPreview').src = stored.photoURL;
+} else {
+  document.getElementById('photoPreview').style.display = 'none';
+}
+
+// Dynamic match text
 if (stored.interestedIn) {
-  document.getElementById('matchLine').textContent = 
+  document.getElementById('matchLine').textContent =
     `We are finding a ${stored.interestedIn} match for you ❤️`;
 }
 
-// Buttons
+// Navigation
 function goHome() {
   window.location.href = 'index.html';
 }
